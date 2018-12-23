@@ -1,3 +1,9 @@
+## Roadmap
+
+1. Fill database from sources.
+2. Create text index (default DB index).
+3. Create UI for getting information from database (fulltext search).
+
 ## Sources
 - https://www.coursera.org
 - https://www.freecodecamp.org
