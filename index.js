@@ -1,3 +1,6 @@
+const HOST = process.argv[2] || '0.0.0.0';
+const PORT = process.argv[3] || 3000;
+
 const express = require('express');
 
 const app = express();
@@ -10,4 +13,4 @@ app.get('/', function (req, res) {
 
 require('./api/search')(app);
 
-app.listen(3000, () => console.log('listening on http://localhost:3000'));
+app.listen(PORT, HOST, () => console.log(`listening on http://${HOST}:${PORT}`));
