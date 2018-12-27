@@ -13,6 +13,7 @@
     "q": "^1.5.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "require-all": "^3.0.0"
   }
 }

@@ -2,8 +2,10 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.static(__dirname + '/client'));
+
 app.get('/', function (req, res) {
-    res.send('Curiosity for all');
+    res.sendFile(__dirname + '/client/index.html');
 });
 
 require('./api/search')(app);
