@@ -1,4 +1,4 @@
-const { Course } = require('../db');
+const { Course } = require('../db/courses');
 
 module.exports = app => {
     app.get('/api/search', function (req, res) {
@@ -6,7 +6,7 @@ module.exports = app => {
 
         const params = q ? { $text: { $search: q } } : {};
     
-        Course.find(params).exec().then(courses => {
+        Course.model.find(params).exec().then(courses => {
             const data = courses.map(({ 
                 _id, title, url, description, sourceId 
             }) => ({
