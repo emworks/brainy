@@ -1,19 +1,34 @@
 import React from 'react';
 
+import './index.scss';
+
 class List extends React.Component {
     state = {
         data: []
     }
 
     render() {
+        const counter = this.state.data.length ? (<div className='search-counter'>
+            Total: {this.state.data.length}
+        </div>) : null;
+
         return (
-            <div>
-                <input 
-                    onChange={this.handleChange} 
-                    value={this.state.q} 
-                    placeholder='Type query'
-                />
-                {this.renderList(this.state.data)}
+            <div className='search-list'>
+                <div className='input-wrapper'>
+                    <div className='wrapper'>
+                        <input 
+                            onChange={this.handleChange} 
+                            value={this.state.q} 
+                            placeholder='Type query'
+                        />
+                    </div>
+                </div>
+                <div className='search-results'>
+                    <div className='wrapper-wide'>
+                        {counter}
+                        {this.renderList(this.state.data)}
+                    </div>
+                </div>
             </div>
         )
     }
@@ -23,7 +38,7 @@ class List extends React.Component {
 
         if (!data.length) {
             return ('undefined' !== typeof this.state.q) 
-                ? <div>No results</div> : null;
+                ? 'No results' : null;
         }
 
         const list = data.map(template);

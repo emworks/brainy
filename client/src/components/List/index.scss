@@ -1,0 +1,121 @@
+.wrapper, .wrapper-wide {
+    padding: 20px;
+}
+
+.wrapper {
+    max-width: 550px;
+}
+
+.wrapper-wide {
+    max-width: 700px;
+}
+
+.search-list {
+    height: 100%;
+
+    .input-wrapper {
+        border-bottom: 1px solid #e6e6e6;
+        margin-bottom: 10px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: #fff;
+        box-shadow: 0px 1px 5px rgba(166,166,166,0.5);
+
+        input {
+            border: 1px solid #e6e6e6;
+            border-radius: 20px;
+            outline: none;
+            height: 36px;
+            padding: 0 12px;
+            width: calc(100% - 24px);
+            transition: border-color 0.15s;
+
+            &:hover, &:focus {
+                border-color: #c6c6c6;
+            }       
+        }
+    }
+
+    .search-counter {
+        margin-bottom: 20px;
+        color: #c6c6c6;
+        font-style: italic;
+        font-size: 13px;
+    }
+
+    .search-results {
+        margin-top: 80px;
+        overflow-y: auto;
+        height: 100%;
+
+        &:after {
+            content: '';
+            height: 80px;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin-bottom: 20px;
+
+                a {
+                    font-size: 18px;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                span {
+                    display: block;
+                    max-height: 65px;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .wrapper, .wrapper-wide {
+        padding: 10px;
+    }
+
+    .search-list {
+        .input-wrapper {
+            input {
+                height: 32px;
+            }
+        }
+
+        .search-counter {
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .search-results {
+            margin-top: 55px;
+
+            &:after {
+                height: 55px;
+            }            
+
+            ul {
+                li {
+                    margin-bottom: 15px;
+
+                    a {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
