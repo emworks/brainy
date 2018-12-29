@@ -26,11 +26,12 @@ function _log(msg, err) {
 
 function _insert(model, data) {
     if (!_insert.data) {
+        _insert.model = model;
         _insert.data = data;
         _insert._length = data.length;
     }
 
-    return Promise.resolve(model.insertMany(_insert.data.splice(0, STEP))).then(docs => {
+    return Promise.resolve(_insert.model.insertMany(_insert.data.splice(0, STEP))).then(docs => {
         console.log(`inserted ${docs.length} docs`);
         if (_insert.data.length) {
             return _insert();
