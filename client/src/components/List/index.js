@@ -19,7 +19,7 @@ class List extends React.Component {
                         <input 
                             onChange={this.handleChange} 
                             value={this.state.q} 
-                            placeholder='Type query'
+                            placeholder='Type subject or course name'
                         />
                     </div>
                 </div>
