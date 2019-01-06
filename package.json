@@ -2,7 +2,10 @@
   "name": "itedu",
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
   "author": "Yevgeny Yakushev <e.v.yakushev@gmail.com>",
   "license": "ISC",
   "devDependencies": {
