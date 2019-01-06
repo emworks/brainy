@@ -19,7 +19,7 @@ class List extends React.Component {
                         <input 
                             onChange={this.handleChange} 
                             value={this.state.q} 
-                            placeholder='Type subject or course name'
+                            placeholder='What do you want to learn?'
                         />
                     </div>
                 </div>
