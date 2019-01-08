@@ -1,8 +1,10 @@
 ## Roadmap
 
-1. Fill database from sources.
-2. Create text index (default DB index).
-3. Create UI for getting information from database (fulltext search).
+1. <s>Fill database from sources.</s>
+2. <s>Create text index (default DB index).</s>
+3. <s>Create UI for getting information from database (fulltext search).</s>
+4. Add filters.
+5. Add more sources.
 
 ## Sources
 - https://www.coursera.org
@@ -23,8 +25,7 @@
 
 
 ## Filter options
-- topic (skills)
-- cost range
-- schedule
-- location
+- cost
+- duration
+- location (or online)
 - language
