@@ -5,6 +5,7 @@
 3. <s>Create UI for getting information from database (fulltext search).</s>
 4. Add filters.
 5. Add more sources.
+6. Use Elasticsearch
 
 ## Sources
 - https://www.coursera.org
