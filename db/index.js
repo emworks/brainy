@@ -5,8 +5,8 @@ mongoose.connect('mongodb://yy:0verdr1ve@ds141674.mlab.com:41674/edu', {
 });
 
 const elasticsearch = new require('elasticsearch').Client({
-  host: 'localhost:9200',
-  log: 'trace'
+    host: 'localhost:9200',
+    // log: 'trace'
 });
 
 module.exports = {
