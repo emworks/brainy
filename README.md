@@ -25,7 +25,7 @@
 
 
 ## Filter options
-- cost
+- price
 - duration
 - location (or online)
 - language
