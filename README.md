@@ -3,9 +3,9 @@
 1. <s>Fill database from sources.</s>
 2. <s>Create text index (default DB index).</s>
 3. <s>Create UI for getting information from database (fulltext search).</s>
-4. Add filters.
-5. Add more sources.
-6. Use Elasticsearch
+4. <s>Use Elasticsearch</s>
+5. Add filters.
+6. Add more sources.
 
 ## Sources
 - https://www.coursera.org
