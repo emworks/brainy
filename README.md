@@ -3,9 +3,10 @@
 1. <s>Fill database from sources.</s>
 2. <s>Create text index (default DB index).</s>
 3. <s>Create UI for getting information from database (fulltext search).</s>
-4. <s>Use Elasticsearch</s>
-5. Add filters.
-6. Add more sources.
+4. <s>Switch to Elasticsearch.</s>
+5. Filter data by language (save only English or Russian courses).
+6. Sort search results by language (desc - from Russian to English).
+7. Add more sources.
 
 ## Sources
 - https://www.coursera.org
