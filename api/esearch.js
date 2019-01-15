@@ -10,6 +10,7 @@ module.exports = app => {
                 query: {
                     multi_match: {
                         query: q,
+                        fuzziness: 'auto',
                         fields: [
                             'title^3',
                             'url^2',
