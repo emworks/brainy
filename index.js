@@ -12,5 +12,6 @@ app.get('/', function (req, res) {
 });
 
 require('./api/search')(app);
+require('./api/search2')(app);
 
 app.listen(PORT, HOST, () => console.log(`listening on http://${HOST}:${PORT}`));

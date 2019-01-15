@@ -1,4 +1,4 @@
-const { Course } = require('../db/courses');
+const { Course } = require('../db/courses/clients/mongoose');
 
 module.exports = app => {
     app.get('/api/search', function (req, res) {
