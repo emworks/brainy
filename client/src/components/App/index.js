@@ -4,7 +4,7 @@ import List from 'src/components/List';
 
 import './index.scss';
 
-const API_URL_SEARCH = 'api/search';
+const API_URL_SEARCH = 'api/esearch';
 
 class App extends React.Component {
     render() {

@@ -10,6 +10,31 @@ function migrate(data = [], indexName) {
         .then(resp => {
             console.log(`successfully created index '${indexName}'`, resp);
 
+            return client.indices.putMapping({
+                index: indexNameTmp,
+                type: 'course',
+                body: {
+                    properties: {
+                        title: { 
+                            type: 'text',
+                            analyzer: 'english'
+                        },
+                        url: { 
+                            type: 'text',
+                            analyzer: 'english'
+                        },
+                        description: { 
+                            type: 'text',
+                            analyzer: 'english'
+                        },
+                        sourceId: { type: 'text' }
+                    }
+                }
+            });
+        })
+        .then(resp => {
+            console.log(`successfully created mapping for '${indexName}'`, resp);
+
             Object.keys(data).forEach(id => {
                 try {
                     client.create({
