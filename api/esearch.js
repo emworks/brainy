@@ -6,7 +6,18 @@ module.exports = app => {
 
         const data = await db.search({
             index: 'edu',
-            q: q
+            body: {
+                query: {
+                    multi_match: {
+                        query: q,
+                        fields: [
+                            'title^3',
+                            'url^2',
+                            'description^1'
+                        ]
+                    }
+                }
+            }
         });
 
         res.send({ q, data: data.hits.hits.map(({ 
