@@ -64,16 +64,23 @@
             li {
                 margin-bottom: 20px;
 
+                > img {
+                    height: 20px;
+                    vertical-align: middle;
+                    margin-right: 4px;
+                }
+
                 a {
                     font-size: 18px;
                     text-decoration: none;
+                    vertical-align: middle;
 
                     &:hover {
                         text-decoration: underline;
                     }
                 }
 
-                span {
+                > span {
                     display: block;
                     max-height: 65px;
                     overflow: hidden;
