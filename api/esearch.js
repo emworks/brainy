@@ -17,7 +17,8 @@ module.exports = app => {
                             'description^1'
                         ]
                     }
-                }
+                },
+                sort: [{ lang: { order: 'desc' } }]
             }
         });
 

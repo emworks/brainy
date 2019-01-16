@@ -15,15 +15,15 @@ function migrate(data = [], indexName) {
                 type: 'course',
                 body: {
                     properties: {
-                        title: { 
+                        title: {
                             type: 'text',
                             analyzer: 'english'
                         },
-                        url: { 
+                        url: {
                             type: 'text',
                             analyzer: 'english'
                         },
-                        description: { 
+                        description: {
                             type: 'text',
                             analyzer: 'english'
                         },
@@ -35,21 +35,14 @@ function migrate(data = [], indexName) {
         .then(resp => {
             console.log(`successfully created mapping for '${indexName}'`, resp);
 
-            Object.keys(data).forEach(id => {
-                try {
-                    client.create({
-                        index: indexNameTmp,
-                        type: 'course',
-                        id: id,
-                        body: data[id]
-                    })
-                } catch (e) {
-                    console.log(`error adding item ${item}`);
-                    console.log(e);
-                }
-            });
-        
-            client.indices.deleteAlias({ index: '*', name: indexName })
+            const body = Object.keys(data).reduce((memo, id) => memo.concat([
+                { index: { _index: indexNameTmp, _type: 'course', _id: id } }, data[id]
+            ]), []);
+
+            return client.bulk({ body })
+        })
+        .then(resp => {
+            return client.indices.deleteAlias({ index: '*', name: indexName })
                 .then(resp => {
                     console.log(`successfully deleted index '${indexName}'`, resp);
                 })
@@ -63,13 +56,13 @@ function migrate(data = [], indexName) {
                         index: indexNameTmp,
                         name: indexName
                     })
-                    .then(resp => {
-                        console.log('successfully put alias', resp);
-                        process.exit(0);
-                    })
-                    .catch(err => {
-                        _log(`error putting alias`, err);
-                    });
+                        .then(resp => {
+                            console.log('successfully put alias', resp);
+                            process.exit(0);
+                        })
+                        .catch(err => {
+                            _log(`error putting alias`, err);
+                        });
                 });
         })
         .catch(err => {
