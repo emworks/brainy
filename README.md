@@ -4,8 +4,8 @@
 2. <s>Create text index (default DB index).</s>
 3. <s>Create UI for getting information from database (fulltext search).</s>
 4. <s>Switch to Elasticsearch.</s>
-5. Filter data by language (save only English or Russian courses).
-6. Sort search results by language (desc - from Russian to English).
+5. <s>Filter data by language (save only English or Russian courses).</s>
+6. <s>Sort search results by language (desc - from Russian to English).</s>
 7. Add more sources.
 
 ## Sources
