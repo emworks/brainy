@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "crawl": "node ./lib/crawler/index.test.js",
+    "reindex": "node ./db/courses/clients/elasticsearch" 
   },
   "author": "Yevgeny Yakushev <e.v.yakushev@gmail.com>",
   "license": "ISC",
