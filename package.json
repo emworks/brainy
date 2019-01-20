@@ -6,14 +6,13 @@
   "scripts": {
     "start": "node .",
     "crawl": "node ./lib/crawler/index.test.js",
-    "reindex": "node ./db/courses/clients/elasticsearch" 
+    "reindex": "node ./db/courses/clients/elasticsearch"
   },
   "author": "Yevgeny Yakushev <e.v.yakushev@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
     "elasticsearch": "^15.3.0",
-    "express": "^4.16.4",
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.1",
     "q": "^1.5.1",
@@ -21,5 +20,8 @@
     "request-promise": "^4.2.2",
     "require-all": "^3.0.0",
     "xml2js": "^0.4.19"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
