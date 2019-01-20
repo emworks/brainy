@@ -5,7 +5,8 @@
 // });
 
 const elasticsearch = new require('elasticsearch').Client({
-    host: 'localhost:9200',
+    host: 'https://osx6ue22xf:dfo7h63ls6@ginkgo-824136165.us-east-1.bonsaisearch.net',
+    // host: 'localhost:9200',
     // log: 'trace'
 });
 
