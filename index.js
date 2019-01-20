@@ -1,5 +1,4 @@
-const HOST = process.argv[2] || '127.0.0.1';
-const PORT = process.argv[3] || 3000;
+const PORT = process.env.PORT || 3000;
 
 const express = require('express');
 
