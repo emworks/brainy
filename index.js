@@ -14,4 +14,4 @@ app.get('/', function (req, res) {
 // require('./api/search')(app);
 require('./api/esearch')(app);
 
-app.listen(PORT, HOST, () => console.log(`listening on http://${HOST}:${PORT}`));
+app.listen(PORT);
