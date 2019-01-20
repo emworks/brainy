@@ -11,7 +11,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/client/index.html');
 });
 
-require('./api/search')(app);
+// require('./api/search')(app);
 require('./api/esearch')(app);
 
 app.listen(PORT, HOST, () => console.log(`listening on http://${HOST}:${PORT}`));
