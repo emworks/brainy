@@ -23,7 +23,7 @@ class List extends React.Component {
                         />
                     </div>
                 </div>
-                <div className='search-results'>
+                <div className={'search-results' + (this.state.isLoading ? ' unloaded' : '')}>
                     <div className='wrapper-wide'>
                         {counter}
                         {this.renderList(this.state.data)}
@@ -50,7 +50,7 @@ class List extends React.Component {
         )
     }
 
-    handleChange = event => this.fetch(event.target.value, 200)
+    handleChange = event => this.fetch(event.target.value, 500)
 
     fetch = (query, timeout = 0) => {
         this.setState({
@@ -60,9 +60,10 @@ class List extends React.Component {
         clearTimeout(this.fetch.timeout);
 
         this.fetch.timeout = setTimeout(() => {
+            this.setState({ isLoading: true });
             this.state.q && fetch(`${this.props.url}?q=${this.state.q}`)
                 .then(data => data.json())
-                .then(({ data }) => this.setState({ data }))
+                .then(({ data }) => this.setState({ data, isLoading: false }))
         }, timeout);
     }
 }

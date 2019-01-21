@@ -49,6 +49,12 @@
         margin-top: 80px;
         overflow-y: auto;
         height: 100%;
+        opacity: 1;
+        transition: opacity 0.25s;
+
+        &.unloaded {
+            opacity: 0.25;
+        }
 
         &:after {
             content: '';
