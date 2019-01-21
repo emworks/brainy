@@ -60,10 +60,12 @@ class List extends React.Component {
         clearTimeout(this.fetch.timeout);
 
         this.fetch.timeout = setTimeout(() => {
-            this.setState({ isLoading: true });
-            this.state.q && fetch(`${this.props.url}?q=${this.state.q}`)
-                .then(data => data.json())
-                .then(({ data }) => this.setState({ data, isLoading: false }))
+            if (this.state.q) {
+                this.setState({ isLoading: true });
+                fetch(`${this.props.url}?q=${this.state.q}`)
+                    .then(data => data.json())
+                    .then(({ data }) => this.setState({ data, isLoading: false }))
+            }
         }, timeout);
     }
 }
