@@ -35,9 +35,20 @@ function migrate(data = [], indexName) {
         .then(resp => {
             console.log(`successfully created mapping for '${indexName}'`, resp);
 
-            const body = Object.keys(data).reduce((memo, id) => memo.concat([
-                { index: { _index: indexNameTmp, _type: 'course', _id: id } }, data[id]
-            ]), []);
+            const body = Object.keys(data).reduce((memo, id) => {
+                const { url, title, description, sourceId, lang } = data[id];
+                
+                if ('undefined' === typeof url ||
+                    'undefined' === typeof title ||
+                    'undefined' === typeof description) {
+                    return memo;
+                }
+                
+                return memo.concat([
+                    { index: { _index: indexNameTmp, _type: 'course', _id: id } },
+                    { url, title, description, sourceId, lang }
+                ]);
+            }, []);
 
             return client.bulk({ body })
         })
