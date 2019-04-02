@@ -19,7 +19,10 @@ module.exports = app => {
                     }
                 },
                 size: 10000,
-                sort: [{ lang: { order: 'desc' } }]
+                sort: [
+                    { lang: { order: 'desc' }},
+                    { _score: { order: 'desc' }},
+                ]
             }
         });
 
