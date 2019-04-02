@@ -36,7 +36,10 @@ function migrate(data = [], indexName) {
             console.log(`successfully created mapping for '${indexName}'`, resp);
 
             const body = Object.keys(data).reduce((memo, id) => {
-                const { url, title, description, sourceId, lang } = data[id];
+                const { 
+                    url, title, description, 
+                    sourceId, lang, dateFrom, rating
+                } = data[id];
                 
                 if ('undefined' === typeof url ||
                     'undefined' === typeof title ||
@@ -46,7 +49,10 @@ function migrate(data = [], indexName) {
                 
                 return memo.concat([
                     { index: { _index: indexNameTmp, _type: 'course', _id: id } },
-                    { url, title, description, sourceId, lang }
+                    { 
+                        url, title, description, 
+                        sourceId, lang, dateFrom, rating
+                    }
                 ]);
             }, []);
 

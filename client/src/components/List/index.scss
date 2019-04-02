@@ -87,10 +87,22 @@
                     }
                 }
 
-                > span {
-                    display: block;
+                .rating {
+                    display: inline-block;
+                    top: 2px;
+                    padding-left: 7px;
+                    position: relative;
+                    color: #999;
+                }
+
+                .description {
                     max-height: 65px;
                     overflow: hidden;
+                }
+
+                .dateFrom {
+                    font-size: 0.9em;
+                    color: #999;
                 }
             }
         }

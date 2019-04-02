@@ -24,9 +24,9 @@ module.exports = app => {
         });
 
         res.send({ q, data: data.hits.hits.map(({ 
-            _id, _source: { title, url, description, sourceId } = {}
+            _id, _source: { title, url, description, sourceId, dateFrom, rating } = {}
         }) => ({
-            _id, title, url, description, sourceId
+            _id, title, url, description, sourceId, dateFrom, rating
         })) });
     });
 };

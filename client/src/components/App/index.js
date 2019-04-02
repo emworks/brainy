@@ -11,7 +11,15 @@ class App extends React.Component {
         const template = item => <li key={item._id}>
             <img src={getFaviconByUrl(item.url)} title={item.sourceId} />
             <a href={item.url} target='_blank'>{item.title}</a>
-            <span dangerouslySetInnerHTML={{__html: item.description}}></span>
+            <div className='rating' 
+                dangerouslySetInnerHTML={{__html: item.rating ? `${item.rating}/5` : '' }} 
+            />
+            <div className='description' 
+                dangerouslySetInnerHTML={{__html: item.description}} 
+            />
+            <div className='dateFrom' 
+                dangerouslySetInnerHTML={{__html: item.dateFrom || ''}} 
+            />
         </li>
 
         return (
