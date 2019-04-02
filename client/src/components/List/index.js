@@ -9,7 +9,7 @@ class List extends React.Component {
 
     render() {
         const counter = this.state.data.length ? (<div className='search-counter'>
-            Total: {this.state.data.length}
+            Найдено: {this.state.data.length}
         </div>) : null;
 
         return (
@@ -38,7 +38,7 @@ class List extends React.Component {
 
         if (!data.length) {
             return ('undefined' !== typeof this.state.q) 
-                ? 'No results' : null;
+                ? 'Ничего не найдено' : null;
         }
 
         const list = data.map(template);
