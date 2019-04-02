@@ -24724,7 +24724,7 @@ var List = function (_React$Component) {
                         _react2.default.createElement('input', {
                             onChange: this.handleChange,
                             value: this.state.q,
-                            placeholder: 'What do you want to learn?'
+                            placeholder: '\u0427\u0435\u043C\u0443 \u0431\u044B \u0432\u044B \u0445\u043E\u0442\u0435\u043B\u0438 \u043D\u0430\u0443\u0447\u0438\u0442\u044C\u0441\u044F?'
                         })
                     )
                 ),
