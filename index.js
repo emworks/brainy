@@ -11,6 +11,8 @@ app.get('/', function (req, res) {
 });
 
 // require('./api/search')(app);
-require('./api/esearch')(app);
+const esearch = require('./api/esearch')(app);
+
+require('./lib/bot/telegram')({ esearch });
 
 app.listen(PORT);

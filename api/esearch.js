@@ -1,6 +1,6 @@
 const db = require('../db/').elasticsearch;
 
-async function _search(query = '') {
+async function _search(query = '', size = 10000) {
     const data = await db.search({
         index: 'edu',
         body: {
@@ -15,7 +15,7 @@ async function _search(query = '') {
                     ]
                 }
             },
-            size: 10000,
+            size,
             sort: [
                 { lang: { order: 'desc' }},
                 { _score: { order: 'desc' }},
@@ -46,7 +46,7 @@ async function _search(query = '') {
 
 module.exports = app => {
     app.get('/api/esearch', async function (req, res) {
-        const data = await _search(req.query.q)
+        const data = await _search(req.query.q);
         res.send(data);
     });
 
