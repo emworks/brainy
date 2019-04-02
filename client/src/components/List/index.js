@@ -8,8 +8,28 @@ class List extends React.Component {
     }
 
     render() {
-        const counter = this.state.data.length ? (<div className='search-counter'>
-            Найдено: {this.state.data.length}
+        const { q, data, isLoading } = this.state;
+
+        const placeholder = 'Чему бы вы хотели научиться?';
+
+        if (!q) {
+            return (
+                <div className={'search-landing preload' + (isLoading ? ' unloaded' : '')}>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='wrapper'>
+                            <input 
+                                name='query'
+                                className='input' 
+                                placeholder={placeholder} 
+                            />
+                        </div>
+                    </form>
+                </div>
+            )
+        }
+
+        const counter = data.length ? (<div className='search-counter'>
+            Найдено: {data.length}
         </div>) : null;
 
         return (
@@ -17,16 +37,18 @@ class List extends React.Component {
                 <div className='input-wrapper'>
                     <div className='wrapper'>
                         <input 
+                            name='query'
+                            className='input'
                             onChange={this.handleChange} 
-                            value={this.state.q} 
-                            placeholder='Чему бы вы хотели научиться?'
+                            value={q} 
+                            placeholder={placeholder}
                         />
                     </div>
                 </div>
-                <div className={'search-results' + (this.state.isLoading ? ' unloaded' : '')}>
+                <div className={'search-results preload' + (isLoading ? ' unloaded' : '')}>
                     <div className='wrapper-wide'>
                         {counter}
-                        {this.renderList(this.state.data)}
+                        {this.renderList(data)}
                     </div>
                 </div>
             </div>
@@ -50,21 +72,36 @@ class List extends React.Component {
         )
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+        
+        this.setState({ isLoading: true });
+
+        const data = new FormData(event.target);
+        this.fetch(data.get('query'));
+    }
+
     handleChange = event => this.fetch(event.target.value, 500)
 
     fetch = (query, timeout = 0) => {
-        this.setState({
-            q: query || undefined
-        });
+        if (timeout) {
+            this.setState({
+                q: query || undefined
+            });
+        }
 
         clearTimeout(this.fetch.timeout);
 
         this.fetch.timeout = setTimeout(() => {
-            if (this.state.q) {
+            if (query) {
                 this.setState({ isLoading: true });
-                fetch(`${this.props.url}?q=${this.state.q}`)
+                fetch(`${this.props.url}?q=${query}`)
                     .then(data => data.json())
-                    .then(({ data }) => this.setState({ data, isLoading: false }))
+                    .then(({ data }) => this.setState({ 
+                        data, 
+                        isLoading: false,
+                        q: query
+                    }))
             }
         }, timeout);
     }
