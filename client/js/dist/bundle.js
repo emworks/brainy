@@ -24667,7 +24667,7 @@ var List = function (_React$Component) {
 
 
             if (!data.length) {
-                return 'undefined' !== typeof _this.state.q ? 'No results' : null;
+                return 'undefined' !== typeof _this.state.q ? 'Ничего не найдено' : null;
             }
 
             var list = data.map(template);
@@ -24708,7 +24708,7 @@ var List = function (_React$Component) {
             var counter = this.state.data.length ? _react2.default.createElement(
                 'div',
                 { className: 'search-counter' },
-                'Total: ',
+                '\u041D\u0430\u0439\u0434\u0435\u043D\u043E: ',
                 this.state.data.length
             ) : null;
 
