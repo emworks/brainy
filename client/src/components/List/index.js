@@ -108,7 +108,7 @@ class List extends React.Component {
         this.fetch.timeout = setTimeout(() => {
             if (query) {
                 this.setState({ isLoading: true });
-                fetch(`${this.props.url}?q=${query}`)
+                fetch(`${this.props.url}?q=${query}&client=web`)
                     .then(data => data.json())
                     .then(({ data }) => this.setState({ 
                         data, 

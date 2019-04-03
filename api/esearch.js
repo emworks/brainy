@@ -1,4 +1,5 @@
 const db = require('../db/').elasticsearch;
+const logger = require('../lib/logger');
 
 async function _search(query = '', size = 10000) {
     const data = await db.search({
@@ -46,6 +47,7 @@ async function _search(query = '', size = 10000) {
 
 module.exports = app => {
     app.get('/api/esearch', async function (req, res) {
+        logger.add(req.query.q, 'query', req.query.client || 'bot');
         const data = await _search(req.query.q);
         res.send(data);
     });

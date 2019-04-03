@@ -24714,7 +24714,7 @@ var List = function (_React$Component) {
             _this.fetch.timeout = setTimeout(function () {
                 if (query) {
                     _this.setState({ isLoading: true });
-                    fetch(_this.props.url + '?q=' + query).then(function (data) {
+                    fetch(_this.props.url + '?q=' + query + '&client=web').then(function (data) {
                         return data.json();
                     }).then(function (_ref) {
                         var data = _ref.data;
