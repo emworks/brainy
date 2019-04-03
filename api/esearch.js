@@ -47,7 +47,7 @@ async function _search(query = '', size = 10000) {
 
 module.exports = app => {
     app.get('/api/esearch', async function (req, res) {
-        logger.add(req.query.q, 'query', req.query.client || 'bot');
+        logger.add(req.query.q, 'query', req.query.client);
         const data = await _search(req.query.q);
         res.send(data);
     });
