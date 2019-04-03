@@ -109,6 +109,7 @@ class List extends React.Component {
                         isLoading: false,
                         q: query
                     }))
+                    .then(() => document.querySelector('.search-results').scrollTop = 0)
             }
         }, timeout);
     }

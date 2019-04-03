@@ -24721,6 +24721,8 @@ var List = function (_React$Component) {
                             isLoading: false,
                             q: query
                         });
+                    }).then(function () {
+                        return document.querySelector('.search-results').scrollTop = 0;
                     });
                 }
             }, timeout);
