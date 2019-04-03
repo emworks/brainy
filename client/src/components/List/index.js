@@ -3,6 +3,11 @@ import React from 'react';
 import './index.scss';
 
 class List extends React.Component {
+    constructor(props) {
+        super(props);
+        this.listRef = React.createRef();
+    }
+
     state = {
         data: []
     }
@@ -48,7 +53,8 @@ class List extends React.Component {
                         </div>
                     </form>
                 </div>
-                <div className={'search-results preload' + (isLoading ? ' unloaded' : '')}>
+                <div ref={this.listRef}
+                    className={'search-results preload' + (isLoading ? ' unloaded' : '')}>
                     <div className='wrapper-wide'>
                         {counter}
                         {this.renderList(data)}
@@ -109,7 +115,7 @@ class List extends React.Component {
                         isLoading: false,
                         q: query
                     }))
-                    .then(() => document.querySelector('.search-results').scrollTop = 0)
+                    .then(() => this.listRef.current.scrollTop = 0)
             }
         }, timeout);
     }

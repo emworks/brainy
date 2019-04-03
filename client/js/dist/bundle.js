@@ -24657,20 +24657,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var List = function (_React$Component) {
     _inherits(List, _React$Component);
 
-    function List() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function List(props) {
         _classCallCheck(this, List);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = List.__proto__ || Object.getPrototypeOf(List)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+        _this.state = {
             data: []
-        }, _this.renderList = function (data) {
+        };
+
+        _this.renderList = function (data) {
             var template = _this.props.template;
 
 
@@ -24685,7 +24681,9 @@ var List = function (_React$Component) {
                 null,
                 list
             );
-        }, _this.handleSubmit = function (event) {
+        };
+
+        _this.handleSubmit = function (event) {
             event.preventDefault();
 
             var data = new FormData(event.target);
@@ -24696,9 +24694,13 @@ var List = function (_React$Component) {
 
             _this.setState({ isLoading: true });
             _this.fetch(data.get('query'));
-        }, _this.handleChange = function (event) {
+        };
+
+        _this.handleChange = function (event) {
             return _this.fetch(event.target.value, 500);
-        }, _this.fetch = function (query) {
+        };
+
+        _this.fetch = function (query) {
             var timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
             if (timeout) {
@@ -24714,19 +24716,22 @@ var List = function (_React$Component) {
                     _this.setState({ isLoading: true });
                     fetch(_this.props.url + '?q=' + query).then(function (data) {
                         return data.json();
-                    }).then(function (_ref2) {
-                        var data = _ref2.data;
+                    }).then(function (_ref) {
+                        var data = _ref.data;
                         return _this.setState({
                             data: data,
                             isLoading: false,
                             q: query
                         });
                     }).then(function () {
-                        return document.querySelector('.search-results').scrollTop = 0;
+                        return _this.listRef.current.scrollTop = 0;
                     });
                 }
             }, timeout);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.listRef = _react2.default.createRef();
+        return _this;
     }
 
     _createClass(List, [{
@@ -24800,7 +24805,8 @@ var List = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'search-results preload' + (isLoading ? ' unloaded' : '') },
+                    { ref: this.listRef,
+                        className: 'search-results preload' + (isLoading ? ' unloaded' : '') },
                     _react2.default.createElement(
                         'div',
                         { className: 'wrapper-wide' },
