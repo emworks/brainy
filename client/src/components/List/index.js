@@ -36,18 +36,16 @@ class List extends React.Component {
         return (
             <div className='search-list'>
                 <div className='input-wrapper'>
-                    <div className='wrapper'>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className='wrapper'>
-                                <input 
-                                    name='query'
-                                    className='input'
-                                    placeholder={placeholder}
-                                />
-                                <button className='button'>Найти</button>
-                            </div>
-                        </form>
-                    </div>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='wrapper'>
+                            <input 
+                                name='query'
+                                className='input'
+                                placeholder={placeholder}
+                            />
+                            <button className='button'>Найти</button>
+                        </div>
+                    </form>
                 </div>
                 <div className={'search-results preload' + (isLoading ? ' unloaded' : '')}>
                     <div className='wrapper-wide'>

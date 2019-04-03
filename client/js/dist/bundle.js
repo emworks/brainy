@@ -24777,24 +24777,20 @@ var List = function (_React$Component) {
                     'div',
                     { className: 'input-wrapper' },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'wrapper' },
+                        'form',
+                        { onSubmit: this.handleSubmit },
                         _react2.default.createElement(
-                            'form',
-                            { onSubmit: this.handleSubmit },
+                            'div',
+                            { className: 'wrapper' },
+                            _react2.default.createElement('input', {
+                                name: 'query',
+                                className: 'input',
+                                placeholder: placeholder
+                            }),
                             _react2.default.createElement(
-                                'div',
-                                { className: 'wrapper' },
-                                _react2.default.createElement('input', {
-                                    name: 'query',
-                                    className: 'input',
-                                    placeholder: placeholder
-                                }),
-                                _react2.default.createElement(
-                                    'button',
-                                    { className: 'button' },
-                                    '\u041D\u0430\u0439\u0442\u0438'
-                                )
+                                'button',
+                                { className: 'button' },
+                                '\u041D\u0430\u0439\u0442\u0438'
                             )
                         )
                     )
