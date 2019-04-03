@@ -35,6 +35,7 @@ const actionSchema = new mongoose.Schema({
         required: true
     },
     type: String,
+    client: String,
     user: String,
     timestamp: String
 });
