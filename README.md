@@ -7,7 +7,7 @@
 5. <s>Filter data by language (save only English or Russian courses).</s>
 6. <s>Sort search results by language (desc - from Russian to English).</s>
 7. <s>Add more sources.</s>
-8. Add search button. 
+8. <s>Add search button.</s>
 9. <s>Add strict search mode.</s>
 10. <s>Add more information (rating + number of reviews, start date).</s>
 11. Add main page (list of most popular + ad).
@@ -20,7 +20,7 @@
 18. Move quick search to suggestions.
 19. Fix bot pagination.
 20. Https.
-21. Separate web and bot search logs.
+21. <s>Separate web and bot search logs.</s>
 
 ## Sources
 - <s>https://www.coursera.org</s>
