@@ -24688,9 +24688,13 @@ var List = function (_React$Component) {
         }, _this.handleSubmit = function (event) {
             event.preventDefault();
 
-            _this.setState({ isLoading: true });
-
             var data = new FormData(event.target);
+
+            if (!data.get('query')) {
+                return;
+            }
+
+            _this.setState({ isLoading: true });
             _this.fetch(data.get('query'));
         }, _this.handleChange = function (event) {
             return _this.fetch(event.target.value, 500);
@@ -24784,7 +24788,6 @@ var List = function (_React$Component) {
                                 _react2.default.createElement('input', {
                                     name: 'query',
                                     className: 'input',
-                                    value: q,
                                     placeholder: placeholder
                                 }),
                                 _react2.default.createElement(

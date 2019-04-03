@@ -42,7 +42,6 @@ class List extends React.Component {
                                 <input 
                                     name='query'
                                     className='input'
-                                    value={q} 
                                     placeholder={placeholder}
                                 />
                                 <button className='button'>Найти</button>
@@ -80,9 +79,13 @@ class List extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         
-        this.setState({ isLoading: true });
-
         const data = new FormData(event.target);
+
+        if (!data.get('query')) {
+            return;
+        }
+
+        this.setState({ isLoading: true });
         this.fetch(data.get('query'));
     }
 
