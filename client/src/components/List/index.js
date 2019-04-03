@@ -22,6 +22,7 @@ class List extends React.Component {
                                 className='input' 
                                 placeholder={placeholder} 
                             />
+                            <button className='button'>Найти</button>
                         </div>
                     </form>
                 </div>
@@ -36,13 +37,17 @@ class List extends React.Component {
             <div className='search-list'>
                 <div className='input-wrapper'>
                     <div className='wrapper'>
-                        <input 
-                            name='query'
-                            className='input'
-                            onChange={this.handleChange} 
-                            value={q} 
-                            placeholder={placeholder}
-                        />
+                        <form onSubmit={this.handleSubmit}>
+                            <div className='wrapper'>
+                                <input 
+                                    name='query'
+                                    className='input'
+                                    value={q} 
+                                    placeholder={placeholder}
+                                />
+                                <button className='button'>Найти</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div className={'search-results preload' + (isLoading ? ' unloaded' : '')}>
