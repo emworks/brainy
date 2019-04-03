@@ -42,6 +42,7 @@ class List extends React.Component {
                                 name='query'
                                 className='input'
                                 placeholder={placeholder}
+                                defaultValue={q}
                             />
                             <button className='button'>Найти</button>
                         </div>
