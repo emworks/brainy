@@ -103,13 +103,13 @@ class List extends React.Component {
             <form action='export' target='_blank' onReset={this.handleReset}>
                 <div className='list-actions fixed'>
                     <div className='wrapper-wide'>
-                        <span className='tip'>
-                            Выделено: {selected.size}
-                        </span>
                         <Clipboard className='button' type='reset' data-clipboard-text={this.getSelectedUrls()}>
                             Копировать
                         </Clipboard>
                         {exportBtn}
+                        <span className='tip'>
+                            {selected.size}
+                        </span>
                         <button className='button button-reset' type='reset' title='Сбросить'>
                             &#10006;
                         </button>

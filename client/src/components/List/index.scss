@@ -87,7 +87,6 @@
     color: #c6c6c6;
     font-style: italic;
     font-size: 13px;
-    margin-right: 15px;
 }
 
 .search-landing {
@@ -137,6 +136,10 @@
             bottom: -80px;
             left: 0;
             transition: bottom 0.2s ease, top 0.2s ease;
+
+            .tip {
+                margin-left: 15px;
+            }
         }
 
         ul {
@@ -217,6 +220,10 @@
     }
 
     .button {
+        + .button {
+            margin-left: 10px;
+        }
+
         &.button-search {
             margin: 10px;
         }
@@ -260,6 +267,10 @@
                 margin-bottom: 10px;
                 bottom: inherit;
                 top: -80px;
+
+                .tip {
+                    margin-left: 10px;
+                }
             }
 
             &:after {
