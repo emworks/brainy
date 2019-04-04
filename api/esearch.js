@@ -30,13 +30,10 @@ async function _search(body) {
     })) };
 }
 
-module.exports = app => {
-    app.get('/api/esearch', async function (req, res) {
-        const { q, client } = req.query;
-
-        logger.add(q, 'query', client);
-
-        const body = {
+async function _searchByQuery(q = '', size = 10000) {
+    const data = await db.search({
+        index: 'edu',
+        body: {
             query: {
                 multi_match: {
                     query: q,
@@ -48,18 +45,49 @@ module.exports = app => {
                     ]
                 }
             },
-            size: 10000,
+            size,
             sort: [
                 { lang: { order: 'desc' }},
                 { _score: { order: 'desc' }},
             ]
         }
+    });
 
-        const data = await _search(body);
+    return { data: data.hits.hits.map(({ 
+        _id, 
+        _source: { 
+            title, 
+            url, 
+            description, 
+            sourceId, 
+            dateFrom, 
+            rating,
+            lang
+        } = {}
+    }) => ({
+        _id, 
+        title, 
+        url, 
+        description, 
+        sourceId, 
+        dateFrom, 
+        rating,
+        lang
+    })) };
+}
+
+module.exports = app => {
+    app.get('/api/esearch', async function (req, res) {
+        const { q, client } = req.query;
+
+        logger.add(q, 'query', client);
+
+        const data = await _searchByQuery(q);
         res.send(Object.assign({ q }, data));
     });
 
     return {
-        search: _search
+        search: _search,
+        searchByQuery: _searchByQuery
     }
 };
