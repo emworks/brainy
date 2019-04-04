@@ -4,6 +4,13 @@ const express = require('express');
 
 const app = express();
 
+if (process.env.NODE_ENV === 'production') {
+    app.use((req, res, next) => (req.header('x-forwarded-proto') !== 'https') 
+        ? res.redirect(`https://${req.header('host')}${req.url}`) 
+        : next()
+    );
+}
+
 app.use(express.static(__dirname + '/client'));
 
 app.get('/', function (req, res) {
