@@ -24693,7 +24693,7 @@ var List = function (_React$Component) {
             }
 
             var list = data.map(template(_this.handleSelect.bind(_this)));
-            var actions = _this.state.selected.size ? _react2.default.createElement(
+            var actions = _this.state.selected.size > 1 ? _react2.default.createElement(
                 'div',
                 { className: 'list-actions fixed' },
                 _react2.default.createElement(
@@ -24702,7 +24702,8 @@ var List = function (_React$Component) {
                     _react2.default.createElement(
                         'button',
                         { className: 'button' },
-                        '\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C'
+                        '\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C ',
+                        _this.state.selected.size
                     )
                 )
             ) : null;

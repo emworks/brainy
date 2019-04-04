@@ -78,9 +78,9 @@ class List extends React.Component {
         }
 
         const list = data.map(template(this.handleSelect.bind(this)));
-        const actions = this.state.selected.size ? (<div className='list-actions fixed'>
+        const actions = (this.state.selected.size > 1) ? (<div className='list-actions fixed'>
             <div className='wrapper'>
-                <button className='button'>Сравнить</button>
+                <button className='button'>Сравнить {this.state.selected.size}</button>
             </div>
         </div>) : null;
         
