@@ -1,4 +1,5 @@
 import React from 'react';
+import Clipboard from 'react-clipboard.js';
 
 import './index.scss';
 
@@ -49,7 +50,7 @@ class List extends React.Component {
             )
         }
 
-        const counter = data.length ? (<div className='search-counter'>
+        const counter = data.length ? (<div className='tip'>
             Найдено: {data.length}
         </div>) : null;
 
@@ -72,7 +73,7 @@ class List extends React.Component {
                     className={
                         'search-results preload' + 
                         (isLoading ? ' unloaded' : '') +
-                        (selected.size > 1 ? ' with-actions' : '')
+                        (selected.size ? ' with-actions' : '')
                     }>
                     <div className='wrapper-wide'>
                         {counter}
@@ -93,14 +94,22 @@ class List extends React.Component {
         }
 
         const list = data.map(template(this.handleSelect.bind(this), this.state.selected));
+
+        const exportBtn = selected.size > 1 ? <button className='button' type='submit'>
+            Сравнить
+        </button> : null;
         
         return (
             <form action='export' target='_blank' onReset={this.handleReset}>
                 <div className='list-actions fixed'>
                     <div className='wrapper-wide'>
-                        <button className='button' type='submit'>
-                            Сравнить{selected.size > 1 ? ' ' + selected.size : ''}
-                        </button>
+                        <span className='tip'>
+                            Выделено: {selected.size}
+                        </span>
+                        <Clipboard className='button' type='reset' data-clipboard-text={this.getSelectedUrls()}>
+                            Копировать
+                        </Clipboard>
+                        {exportBtn}
                         <button className='button button-reset' type='reset' title='Сбросить'>
                             &#10006;
                         </button>
@@ -169,6 +178,13 @@ class List extends React.Component {
             }
         }, timeout);
     }
+
+    getSelectedUrls = () => this.state.data.reduce((memo, item) => {
+        if (this.state.selected.has(item._id)) {
+            memo.push(item.url);
+        }
+        return memo;
+    }, []).join('\n');
 }
 
 function isMobile() {
