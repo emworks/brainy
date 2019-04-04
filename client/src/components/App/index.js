@@ -11,13 +11,14 @@ class App extends React.Component {
         const urlParams = new URLSearchParams(window.location.search);
         const q = urlParams.get('q');
 
-        const template = (onChange = () => {}) => item => <li key={item._id}>
+        const template = (onChange = () => {}, selected = new Set()) => item => <li key={item._id}>
             <label>
                 <input 
                     name='course_id' 
                     value={item._id} 
                     type='checkbox'
                     onChange={onChange}
+                    checked={selected.has(item._id)}
                 />
                 <div className='list-item'>
                     <img src={getFaviconByUrl(item.url)} title={item.sourceId} />

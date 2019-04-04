@@ -85,23 +85,28 @@ class List extends React.Component {
 
     renderList = data => {
         const { template } = this.props;
+        const { q, selected } = this.state;
 
         if (!data.length) {
-            return ('undefined' !== typeof this.state.q) 
+            return ('undefined' !== typeof q) 
                 ? 'Ничего не найдено' : null;
         }
 
-        const list = data.map(template(this.handleSelect.bind(this)));
-        const actions = this.state.selected.size > 1 ? (<div className='list-actions fixed'>
-            <div className='wrapper'>
-                <button className='button'>Сравнить {this.state.selected.size}</button>
-            </div>
-        </div>) : null;
+        const list = data.map(template(this.handleSelect.bind(this), this.state.selected));
         
         return (
-            <form action='export' target='_blank'>
-                {actions}
-                <input name='q' type='hidden' value={this.state.q} />
+            <form action='export' target='_blank' onReset={this.handleReset}>
+                <div className='list-actions fixed'>
+                    <div className='wrapper-wide'>
+                        <button className='button' type='submit'>
+                            Сравнить{selected.size > 1 ? ' ' + selected.size : ''}
+                        </button>
+                        <button className='button button-reset' type='reset' title='Сбросить'>
+                            &#10006;
+                        </button>
+                    </div>
+                </div>
+                <input name='q' type='hidden' value={q} />
                 <ul>
                     {list}
                 </ul>
@@ -135,6 +140,10 @@ class List extends React.Component {
     }
 
     handleChange = event => this.fetch(event.target.value, 500)
+
+    handleReset = event => {
+        this.setState({ selected: new Set() });
+    }
 
     fetch = (query, timeout = 0) => {
         if (timeout) {
