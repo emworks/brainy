@@ -8,9 +8,14 @@ const API_URL_SEARCH = 'api/esearch';
 
 class App extends React.Component {
     render() {
-        const template = item => <li key={item._id}>
+        const template = (onChange = () => {}) => item => <li key={item._id}>
             <label>
-                <input name='course_id' value={item._id} type='checkbox' />
+                <input 
+                    name='course_id' 
+                    value={item._id} 
+                    type='checkbox'
+                    onChange={onChange}
+                />
                 <div className='list-item'>
                     <img src={getFaviconByUrl(item.url)} title={item.sourceId} />
                     <a href={item.url} target='_blank'>{item.title}</a>

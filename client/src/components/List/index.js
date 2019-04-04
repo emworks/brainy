@@ -9,11 +9,12 @@ class List extends React.Component {
     }
 
     state = {
-        data: []
+        data: [],
+        selected: new Set()
     }
 
     render() {
-        const { q, data, isLoading } = this.state;
+        const { q, data, isLoading, selected } = this.state;
 
         const placeholder = 'Чему бы вы хотели научиться?';
 
@@ -27,7 +28,7 @@ class List extends React.Component {
                                 className='input' 
                                 placeholder={placeholder} 
                             />
-                            <button className='button'>Найти</button>
+                            <button className='button button-search'>Найти</button>
                         </div>
                     </form>
                 </div>
@@ -40,7 +41,7 @@ class List extends React.Component {
 
         return (
             <div className='search-list'>
-                <div className='input-wrapper'>
+                <div className='input-wrapper fixed'>
                     <form onSubmit={this.handleSubmit}>
                         <div className='wrapper'>
                             <input 
@@ -49,12 +50,16 @@ class List extends React.Component {
                                 placeholder={placeholder}
                                 defaultValue={q}
                             />
-                            <button className='button'>Найти</button>
+                            <button className='button button-search'>Найти</button>
                         </div>
                     </form>
                 </div>
                 <div ref={this.listRef}
-                    className={'search-results preload' + (isLoading ? ' unloaded' : '')}>
+                    className={
+                        'search-results preload' + 
+                        (isLoading ? ' unloaded' : '') +
+                        (selected.size ? ' with-actions' : '')
+                    }>
                     <div className='wrapper-wide'>
                         {counter}
                         {this.renderList(data)}
@@ -72,17 +77,34 @@ class List extends React.Component {
                 ? 'Ничего не найдено' : null;
         }
 
-        const list = data.map(template);
+        const list = data.map(template(this.handleSelect.bind(this)));
+        const actions = this.state.selected.size ? (<div className='list-actions fixed'>
+            <div className='wrapper'>
+                <button className='button'>Сравнить</button>
+            </div>
+        </div>) : null;
         
         return (
             <form action='export' target='_blank'>
-                <button>Открыть в .pdf</button>
+                {actions}
                 <input name='q' type='hidden' value={this.state.q} />
                 <ul>
                     {list}
                 </ul>
             </form>
         )
+    }
+
+    handleSelect = event => {
+        let { selected } = this.state;
+
+        if (event.target.checked) {
+            selected.add(event.target.value);
+        } else {
+            selected.delete(event.target.value);
+        }
+
+        this.setState({ selected });
     }
 
     handleSubmit = event => {
@@ -117,7 +139,8 @@ class List extends React.Component {
                     .then(({ data }) => this.setState({ 
                         data, 
                         isLoading: false,
-                        q: query
+                        q: query,
+                        selected: new Set()
                     }))
                     .then(() => this.listRef.current.scrollTop = 0)
             }

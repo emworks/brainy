@@ -24572,35 +24572,43 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            var template = function template(item) {
-                return _react2.default.createElement(
-                    'li',
-                    { key: item._id },
-                    _react2.default.createElement(
-                        'label',
-                        null,
-                        _react2.default.createElement('input', { name: 'course_id', value: item._id, type: 'checkbox' }),
+            var template = function template() {
+                var onChange = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+                return function (item) {
+                    return _react2.default.createElement(
+                        'li',
+                        { key: item._id },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'list-item' },
-                            _react2.default.createElement('img', { src: getFaviconByUrl(item.url), title: item.sourceId }),
+                            'label',
+                            null,
+                            _react2.default.createElement('input', {
+                                name: 'course_id',
+                                value: item._id,
+                                type: 'checkbox',
+                                onChange: onChange
+                            }),
                             _react2.default.createElement(
-                                'a',
-                                { href: item.url, target: '_blank' },
-                                item.title
-                            ),
-                            _react2.default.createElement('div', { className: 'rating',
-                                dangerouslySetInnerHTML: { __html: item.rating ? item.rating + '/5' : '' }
-                            }),
-                            _react2.default.createElement('div', { className: 'description',
-                                dangerouslySetInnerHTML: { __html: item.description }
-                            }),
-                            _react2.default.createElement('div', { className: 'dateFrom',
-                                dangerouslySetInnerHTML: { __html: item.dateFrom || '' }
-                            })
+                                'div',
+                                { className: 'list-item' },
+                                _react2.default.createElement('img', { src: getFaviconByUrl(item.url), title: item.sourceId }),
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: item.url, target: '_blank' },
+                                    item.title
+                                ),
+                                _react2.default.createElement('div', { className: 'rating',
+                                    dangerouslySetInnerHTML: { __html: item.rating ? item.rating + '/5' : '' }
+                                }),
+                                _react2.default.createElement('div', { className: 'description',
+                                    dangerouslySetInnerHTML: { __html: item.description }
+                                }),
+                                _react2.default.createElement('div', { className: 'dateFrom',
+                                    dangerouslySetInnerHTML: { __html: item.dateFrom || '' }
+                                })
+                            )
                         )
-                    )
-                );
+                    );
+                };
             };
 
             return _react2.default.createElement(
@@ -24672,7 +24680,8 @@ var List = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
         _this.state = {
-            data: []
+            data: [],
+            selected: new Set()
         };
 
         _this.renderList = function (data) {
@@ -24683,16 +24692,25 @@ var List = function (_React$Component) {
                 return 'undefined' !== typeof _this.state.q ? 'Ничего не найдено' : null;
             }
 
-            var list = data.map(template);
+            var list = data.map(template(_this.handleSelect.bind(_this)));
+            var actions = _this.state.selected.size ? _react2.default.createElement(
+                'div',
+                { className: 'list-actions fixed' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'wrapper' },
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'button' },
+                        '\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C'
+                    )
+                )
+            ) : null;
 
             return _react2.default.createElement(
                 'form',
                 { action: 'export', target: '_blank' },
-                _react2.default.createElement(
-                    'button',
-                    null,
-                    '\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432 .pdf'
-                ),
+                actions,
                 _react2.default.createElement('input', { name: 'q', type: 'hidden', value: _this.state.q }),
                 _react2.default.createElement(
                     'ul',
@@ -24700,6 +24718,19 @@ var List = function (_React$Component) {
                     list
                 )
             );
+        };
+
+        _this.handleSelect = function (event) {
+            var selected = _this.state.selected;
+
+
+            if (event.target.checked) {
+                selected.add(event.target.value);
+            } else {
+                selected.delete(event.target.value);
+            }
+
+            _this.setState({ selected: selected });
         };
 
         _this.handleSubmit = function (event) {
@@ -24740,7 +24771,8 @@ var List = function (_React$Component) {
                         return _this.setState({
                             data: data,
                             isLoading: false,
-                            q: query
+                            q: query,
+                            selected: new Set()
                         });
                     }).then(function () {
                         return _this.listRef.current.scrollTop = 0;
@@ -24759,7 +24791,8 @@ var List = function (_React$Component) {
             var _state = this.state,
                 q = _state.q,
                 data = _state.data,
-                isLoading = _state.isLoading;
+                isLoading = _state.isLoading,
+                selected = _state.selected;
 
 
             var placeholder = 'Чему бы вы хотели научиться?';
@@ -24781,7 +24814,7 @@ var List = function (_React$Component) {
                             }),
                             _react2.default.createElement(
                                 'button',
-                                { className: 'button' },
+                                { className: 'button button-search' },
                                 '\u041D\u0430\u0439\u0442\u0438'
                             )
                         )
@@ -24801,7 +24834,7 @@ var List = function (_React$Component) {
                 { className: 'search-list' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'input-wrapper' },
+                    { className: 'input-wrapper fixed' },
                     _react2.default.createElement(
                         'form',
                         { onSubmit: this.handleSubmit },
@@ -24816,7 +24849,7 @@ var List = function (_React$Component) {
                             }),
                             _react2.default.createElement(
                                 'button',
-                                { className: 'button' },
+                                { className: 'button button-search' },
                                 '\u041D\u0430\u0439\u0442\u0438'
                             )
                         )
@@ -24825,7 +24858,7 @@ var List = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { ref: this.listRef,
-                        className: 'search-results preload' + (isLoading ? ' unloaded' : '') },
+                        className: 'search-results preload' + (isLoading ? ' unloaded' : '') + (selected.size ? ' with-actions' : '') },
                     _react2.default.createElement(
                         'div',
                         { className: 'wrapper-wide' },
@@ -24890,7 +24923,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".wrapper, .wrapper-wide {\n  padding: 20px; }\n\n.wrapper {\n  max-width: 550px;\n  position: relative; }\n\n.wrapper-wide {\n  max-width: 700px; }\n\n.preload {\n  opacity: 1;\n  transition: opacity 0.25s; }\n  .preload.unloaded {\n    opacity: 0.25; }\n\n.input {\n  border: 1px solid #e6e6e6;\n  border-radius: 20px;\n  outline: none;\n  height: 36px;\n  padding: 0 122px 0 12px;\n  width: calc(100% - 134px);\n  transition: border-color 0.15s; }\n  .input:hover, .input:focus {\n    border-color: #c6c6c6; }\n\n.button {\n  position: absolute;\n  right: -1px;\n  top: 1px;\n  margin: 20px;\n  height: 36px;\n  border: 0;\n  background-color: #d9ba77;\n  outline: 0;\n  border-radius: 0 20px 20px 0;\n  width: 110px;\n  cursor: pointer;\n  font-weight: 600;\n  color: #fff;\n  font-size: 15px; }\n  .button:hover, .button:focus {\n    box-shadow: 0px 0px 6px rgba(166, 166, 166, 0.5); }\n\n.search-landing {\n  height: 100%;\n  display: table;\n  width: 100%;\n  text-align: center; }\n  .search-landing form {\n    display: table-cell;\n    vertical-align: middle; }\n    .search-landing form .wrapper {\n      margin: 0 auto;\n      max-width: 400px; }\n\n.search-list {\n  height: 100%; }\n  .search-list .input-wrapper {\n    border-bottom: 1px solid #e6e6e6;\n    margin-bottom: 10px;\n    position: fixed;\n    width: 100%;\n    top: 0;\n    left: 0;\n    background: #fff;\n    box-shadow: 0px 1px 5px rgba(166, 166, 166, 0.5);\n    z-index: 1; }\n  .search-list .search-counter {\n    margin-bottom: 20px;\n    color: #c6c6c6;\n    font-style: italic;\n    font-size: 13px; }\n  .search-list .search-results {\n    margin-top: 80px;\n    overflow-y: auto;\n    height: 100%; }\n    .search-list .search-results:after {\n      content: '';\n      height: 80px;\n      display: block; }\n    .search-list .search-results button {\n      display: none;\n      margin-bottom: 20px; }\n    .search-list .search-results ul {\n      list-style: none;\n      margin: 0;\n      padding: 0; }\n      .search-list .search-results ul li {\n        margin-bottom: 20px; }\n        .search-list .search-results ul li input[type=checkbox] {\n          display: none; }\n          .search-list .search-results ul li input[type=checkbox]:checked ~ .list-item:before {\n            background-color: #4eb276; }\n        .search-list .search-results ul li .list-item {\n          position: relative; }\n          .search-list .search-results ul li .list-item:before {\n            content: '';\n            position: absolute;\n            height: calc(100% + 20px);\n            width: 3px;\n            left: -13px;\n            top: -10px;\n            transition: all 0.1s ease-in; }\n          .search-list .search-results ul li .list-item img {\n            height: 20px;\n            vertical-align: middle;\n            margin-right: 4px; }\n          .search-list .search-results ul li .list-item a {\n            font-size: 18px;\n            text-decoration: none;\n            vertical-align: middle; }\n            .search-list .search-results ul li .list-item a:hover {\n              text-decoration: underline; }\n          .search-list .search-results ul li .list-item .rating {\n            display: inline-block;\n            top: 2px;\n            padding-left: 7px;\n            position: relative;\n            color: #999; }\n          .search-list .search-results ul li .list-item .description {\n            max-height: 65px;\n            overflow: hidden; }\n          .search-list .search-results ul li .list-item .dateFrom {\n            font-size: 0.9em;\n            color: #999; }\n\n@media (max-width: 700px) {\n  .wrapper, .wrapper-wide {\n    padding: 10px; }\n  .button {\n    margin: 10px; }\n  .search-list .input-wrapper {\n    border-bottom: none;\n    border-top: 1px solid #e6e6e6;\n    margin-bottom: 0;\n    margin-top: 10px;\n    top: inherit;\n    bottom: 0;\n    box-shadow: 0px -1px 5px rgba(166, 166, 166, 0.5); }\n  .search-list .search-counter {\n    font-size: 12px;\n    margin-bottom: 10px; }\n  .search-list .search-results {\n    margin-top: 0;\n    margin-bottom: 55px; }\n    .search-list .search-results:after {\n      height: 55px; }\n    .search-list .search-results ul li {\n      margin-bottom: 15px; }\n      .search-list .search-results ul li a {\n        font-size: 16px; } }\n", ""]);
+exports.push([module.i, ".wrapper, .wrapper-wide {\n  padding: 20px; }\n\n.wrapper {\n  max-width: 550px;\n  position: relative; }\n\n.wrapper-wide {\n  max-width: 700px; }\n\n.preload {\n  opacity: 1;\n  transition: opacity 0.25s; }\n  .preload.unloaded {\n    opacity: 0.25; }\n\n.fixed {\n  position: fixed;\n  width: 100%;\n  background: #fff;\n  box-shadow: 0px 1px 5px rgba(166, 166, 166, 0.5);\n  z-index: 1; }\n\n.input {\n  border: 1px solid #e6e6e6;\n  border-radius: 20px;\n  outline: none;\n  height: 36px;\n  padding: 0 122px 0 12px;\n  width: calc(100% - 134px);\n  transition: border-color 0.15s; }\n  .input:hover, .input:focus {\n    border-color: #c6c6c6; }\n\n.button {\n  height: 36px;\n  border: 0;\n  background-color: #4eb276;\n  outline: 0;\n  width: auto;\n  cursor: pointer;\n  color: #fff;\n  font-size: 15px;\n  padding: 0 15px; }\n  .button:hover, .button:focus {\n    box-shadow: 0px 0px 6px rgba(166, 166, 166, 0.5); }\n  .button.button-search {\n    font-weight: 600;\n    position: absolute;\n    right: -1px;\n    top: 1px;\n    margin: 20px;\n    background-color: #d9ba77;\n    border-radius: 0 20px 20px 0;\n    width: 110px;\n    padding: 0; }\n\n.search-landing {\n  height: 100%;\n  display: table;\n  width: 100%;\n  text-align: center; }\n  .search-landing form {\n    display: table-cell;\n    vertical-align: middle; }\n    .search-landing form .wrapper {\n      margin: 0 auto;\n      max-width: 400px; }\n\n.search-list {\n  height: 100%; }\n  .search-list .input-wrapper {\n    border-bottom: 1px solid #e6e6e6;\n    margin-bottom: 10px;\n    top: 0;\n    left: 0; }\n  .search-list .search-counter {\n    margin-bottom: 20px;\n    color: #c6c6c6;\n    font-style: italic;\n    font-size: 13px; }\n  .search-list .search-results {\n    margin-top: 80px;\n    overflow-y: auto;\n    height: calc(100% - 80px); }\n    .search-list .search-results.with-actions {\n      height: calc(100% - 160px); }\n    .search-list .search-results .list-actions {\n      border-top: 1px solid #e6e6e6;\n      margin-top: 10px;\n      bottom: 0;\n      left: 0; }\n    .search-list .search-results ul {\n      list-style: none;\n      margin: 0;\n      padding: 0; }\n      .search-list .search-results ul li {\n        margin-bottom: 20px; }\n        .search-list .search-results ul li input[type=checkbox] {\n          display: none; }\n          .search-list .search-results ul li input[type=checkbox]:checked ~ .list-item:before {\n            background-color: #4eb276; }\n        .search-list .search-results ul li .list-item {\n          position: relative; }\n          .search-list .search-results ul li .list-item:before {\n            content: '';\n            position: absolute;\n            height: calc(100% + 20px);\n            width: 3px;\n            left: -13px;\n            top: -10px;\n            transition: all 0.1s ease-in; }\n          .search-list .search-results ul li .list-item img {\n            height: 20px;\n            vertical-align: middle;\n            margin-right: 4px; }\n          .search-list .search-results ul li .list-item a {\n            font-size: 18px;\n            text-decoration: none;\n            vertical-align: middle; }\n            .search-list .search-results ul li .list-item a:hover {\n              text-decoration: underline; }\n          .search-list .search-results ul li .list-item .rating {\n            display: inline-block;\n            top: 2px;\n            padding-left: 7px;\n            position: relative;\n            color: #999; }\n          .search-list .search-results ul li .list-item .description {\n            max-height: 65px;\n            overflow: hidden; }\n          .search-list .search-results ul li .list-item .dateFrom {\n            font-size: 0.9em;\n            color: #999; }\n\n@media (max-width: 700px) {\n  .fixed {\n    box-shadow: 0px -1px 5px rgba(166, 166, 166, 0.5); }\n  .wrapper, .wrapper-wide {\n    padding: 10px; }\n  .button.button-search {\n    margin: 10px; }\n  .search-list .input-wrapper {\n    border-bottom: none;\n    border-top: 1px solid #e6e6e6;\n    margin-bottom: 0;\n    margin-top: 10px;\n    top: inherit;\n    bottom: 0; }\n  .search-list .search-counter {\n    font-size: 12px;\n    margin-bottom: 10px; }\n  .search-list .search-results {\n    margin-top: 0;\n    margin-bottom: 55px;\n    height: calc(100% - 55px); }\n    .search-list .search-results.with-actions {\n      height: calc(100% - 117px);\n      margin-top: 57px; }\n    .search-list .search-results .list-actions {\n      border-top: none;\n      border-bottom: 1px solid #e6e6e6;\n      margin-top: 0;\n      margin-bottom: 10px;\n      bottom: inherit;\n      top: 0; }\n    .search-list .search-results:after {\n      height: 55px; }\n    .search-list .search-results ul li {\n      margin-bottom: 15px; }\n      .search-list .search-results ul li .list-item:before {\n        height: calc(100% + 15px);\n        width: 5px;\n        left: -10px;\n        top: -7px; }\n      .search-list .search-results ul li a {\n        font-size: 16px; } }\n", ""]);
 
 // exports
 

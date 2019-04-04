@@ -20,6 +20,14 @@
     }
 }
 
+.fixed {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 1px 5px rgba(166,166,166,0.5);
+    z-index: 1;
+}
+
 .input {
     border: 1px solid #e6e6e6;
     border-radius: 20px;
@@ -35,23 +43,30 @@
 }
 
 .button {
-    position: absolute;
-    right: -1px;
-    top: 1px;
-    margin: 20px;
     height: 36px;
     border: 0;
-    background-color: #d9ba77;
+    background-color: #4eb276;
     outline: 0;
-    border-radius: 0 20px 20px 0;
-    width: 110px;
+    width: auto;
     cursor: pointer;
-    font-weight: 600;
     color: #fff;
     font-size: 15px;
+    padding: 0 15px;
 
     &:hover, &:focus {
         box-shadow: 0px 0px 6px rgba(166, 166, 166, 0.5);
+    }
+
+    &.button-search {
+        font-weight: 600;
+        position: absolute;
+        right: -1px;
+        top: 1px;
+        margin: 20px;
+        background-color: #d9ba77;
+        border-radius: 0 20px 20px 0;
+        width: 110px;
+        padding: 0;
     }
 }
 
@@ -78,13 +93,8 @@
     .input-wrapper {
         border-bottom: 1px solid #e6e6e6;
         margin-bottom: 10px;
-        position: fixed;
-        width: 100%;
         top: 0;
         left: 0;
-        background: #fff;
-        box-shadow: 0px 1px 5px rgba(166,166,166,0.5);
-        z-index: 1;
     }
 
     .search-counter {
@@ -97,17 +107,17 @@
     .search-results {
         margin-top: 80px;
         overflow-y: auto;
-        height: 100%;
+        height: calc(100% - 80px);
 
-        &:after {
-            content: '';
-            height: 80px;
-            display: block;
+        &.with-actions {
+            height: calc(100% - 160px);
         }
 
-        button {
-            display: none;
-            margin-bottom: 20px;
+        .list-actions {
+            border-top: 1px solid #e6e6e6;
+            margin-top: 10px;
+            bottom: 0;
+            left: 0;
         }
 
         ul {
@@ -179,12 +189,18 @@
 }
 
 @media (max-width: 700px) {
+    .fixed {
+        box-shadow: 0px -1px 5px rgba(166,166,166,0.5);
+    }
+
     .wrapper, .wrapper-wide {
         padding: 10px;
     }
 
     .button {
-        margin: 10px;
+        &.button-search {
+            margin: 10px;
+        }
     }
 
     .search-list {
@@ -195,7 +211,6 @@
             margin-top: 10px;
             top: inherit;
             bottom: 0;
-            box-shadow: 0px -1px 5px rgba(166,166,166,0.5);
         }
 
         .search-counter {
@@ -206,6 +221,21 @@
         .search-results {
             margin-top: 0;
             margin-bottom: 55px;
+            height: calc(100% - 55px);
+
+            &.with-actions {
+                height: calc(100% - 117px);
+                margin-top: 57px;
+            }
+
+            .list-actions {
+                border-top: none;
+                border-bottom: 1px solid #e6e6e6;
+                margin-top: 0;
+                margin-bottom: 10px;
+                bottom: inherit;
+                top: 0;
+            }
 
             &:after {
                 height: 55px;
@@ -214,6 +244,13 @@
             ul {
                 li {
                     margin-bottom: 15px;
+
+                    .list-item:before {
+                        height: calc(100% + 15px);
+                        width: 5px;
+                        left: -10px;
+                        top: -7px;
+                    }
 
                     a {
                         font-size: 16px;
