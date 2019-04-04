@@ -21,7 +21,7 @@
 19. Fix bot pagination.
 20. <s>Https</s>.
 21. <s>Separate web and bot search logs.</s>
-22. Export (web).
+22. <s>Export (web)</s>.
 
 ## Sources
 - <s>https://www.coursera.org</s>
