@@ -24859,7 +24859,7 @@ var List = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { ref: this.listRef,
-                        className: 'search-results preload' + (isLoading ? ' unloaded' : '') + (selected.size ? ' with-actions' : '') },
+                        className: 'search-results preload' + (isLoading ? ' unloaded' : '') + (selected.size > 1 ? ' with-actions' : '') },
                     _react2.default.createElement(
                         'div',
                         { className: 'wrapper-wide' },
