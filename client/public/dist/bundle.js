@@ -24572,6 +24572,9 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var q = urlParams.get('q');
+
             var template = function template() {
                 var onChange = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
                 return function (item) {
@@ -24616,6 +24619,7 @@ var App = function (_React$Component) {
                 null,
                 _react2.default.createElement(_List2.default, {
                     url: API_URL_SEARCH,
+                    q: q,
                     template: template
                 })
             );
@@ -24787,6 +24791,26 @@ var List = function (_React$Component) {
     }
 
     _createClass(List, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (this.props.q) {
+                this.fetch(this.props.q);
+            }
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            if (this.state.q) {
+                var _window$location = window.location,
+                    protocol = _window$location.protocol,
+                    host = _window$location.host,
+                    pathname = _window$location.pathname;
+
+                var path = protocol + '//' + host + pathname + '?q=' + this.state.q;
+                window.history.pushState({ path: path }, '', path);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _state = this.state,

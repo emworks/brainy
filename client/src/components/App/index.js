@@ -8,6 +8,9 @@ const API_URL_SEARCH = 'api/esearch';
 
 class App extends React.Component {
     render() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get('q');
+
         const template = (onChange = () => {}) => item => <li key={item._id}>
             <label>
                 <input 
@@ -36,6 +39,7 @@ class App extends React.Component {
             <React.Fragment>
                 <List
                     url={API_URL_SEARCH}
+                    q={q}
                     template={template}
                 />
             </React.Fragment>

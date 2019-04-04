@@ -13,6 +13,20 @@ class List extends React.Component {
         selected: new Set()
     }
 
+    componentDidMount() {
+        if (this.props.q) {
+            this.fetch(this.props.q);
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.q) {
+            const { protocol, host, pathname } = window.location;
+            const path = `${protocol}//${host}${pathname}?q=${this.state.q}`;
+            window.history.pushState({ path }, '', path);
+        }
+    }
+
     render() {
         const { q, data, isLoading, selected } = this.state;
 
