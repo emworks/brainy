@@ -15,4 +15,6 @@ const esearch = require('./api/esearch')(app);
 
 require('./lib/bot/telegram')({ esearch });
 
+require('./routes')({ app, esearch });
+
 app.listen(PORT);
