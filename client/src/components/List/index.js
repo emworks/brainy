@@ -75,9 +75,13 @@ class List extends React.Component {
         const list = data.map(template);
         
         return (
-            <ul>
-                {list}
-            </ul>
+            <form action='export' target='_blank'>
+                <button>Открыть в .pdf</button>
+                <input name='q' type='hidden' value={this.state.q} />
+                <ul>
+                    {list}
+                </ul>
+            </form>
         )
     }
 

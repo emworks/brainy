@@ -15,7 +15,8 @@ async function _search(body) {
             description, 
             sourceId, 
             dateFrom, 
-            rating 
+            rating,
+            lang
         } = {}
     }) => ({
         _id, 
@@ -24,7 +25,8 @@ async function _search(body) {
         description, 
         sourceId, 
         dateFrom, 
-        rating
+        rating,
+        lang
     })) };
 }
 

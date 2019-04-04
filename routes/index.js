@@ -1,3 +1,3 @@
 module.exports = app => {
-    require('./compare')(app);
+    require('./export')(app);
 };

@@ -105,6 +105,11 @@
             display: block;
         }
 
+        button {
+            display: none;
+            margin-bottom: 20px;
+        }
+
         ul {
             list-style: none;
             margin: 0;
@@ -113,38 +118,60 @@
             li {
                 margin-bottom: 20px;
 
-                > img {
-                    height: 20px;
-                    vertical-align: middle;
-                    margin-right: 4px;
-                }
+                input[type=checkbox] {
+                    display: none;
 
-                a {
-                    font-size: 18px;
-                    text-decoration: none;
-                    vertical-align: middle;
-
-                    &:hover {
-                        text-decoration: underline;
+                    &:checked ~ .list-item:before {
+                        background-color: #4eb276;
                     }
                 }
 
-                .rating {
-                    display: inline-block;
-                    top: 2px;
-                    padding-left: 7px;
+                .list-item {
                     position: relative;
-                    color: #999;
-                }
 
-                .description {
-                    max-height: 65px;
-                    overflow: hidden;
-                }
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        height: calc(100% + 20px);
+                        width: 3px;
+                        left: -13px;
+                        top: -10px;
+                        transition: all 0.1s ease-in;
+                    }
 
-                .dateFrom {
-                    font-size: 0.9em;
-                    color: #999;
+                    img {
+                        height: 20px;
+                        vertical-align: middle;
+                        margin-right: 4px;
+                    }
+    
+                    a {
+                        font-size: 18px;
+                        text-decoration: none;
+                        vertical-align: middle;
+    
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+    
+                    .rating {
+                        display: inline-block;
+                        top: 2px;
+                        padding-left: 7px;
+                        position: relative;
+                        color: #999;
+                    }
+    
+                    .description {
+                        max-height: 65px;
+                        overflow: hidden;
+                    }
+    
+                    .dateFrom {
+                        font-size: 0.9em;
+                        color: #999;
+                    }
                 }
             }
         }

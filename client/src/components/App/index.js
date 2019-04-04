@@ -9,17 +9,22 @@ const API_URL_SEARCH = 'api/esearch';
 class App extends React.Component {
     render() {
         const template = item => <li key={item._id}>
-            <img src={getFaviconByUrl(item.url)} title={item.sourceId} />
-            <a href={item.url} target='_blank'>{item.title}</a>
-            <div className='rating' 
-                dangerouslySetInnerHTML={{__html: item.rating ? `${item.rating}/5` : '' }} 
-            />
-            <div className='description' 
-                dangerouslySetInnerHTML={{__html: item.description}} 
-            />
-            <div className='dateFrom' 
-                dangerouslySetInnerHTML={{__html: item.dateFrom || ''}} 
-            />
+            <label>
+                <input name='course_id' value={item._id} type='checkbox' />
+                <div className='list-item'>
+                    <img src={getFaviconByUrl(item.url)} title={item.sourceId} />
+                    <a href={item.url} target='_blank'>{item.title}</a>
+                    <div className='rating' 
+                        dangerouslySetInnerHTML={{__html: item.rating ? `${item.rating}/5` : '' }} 
+                    />
+                    <div className='description' 
+                        dangerouslySetInnerHTML={{__html: item.description}} 
+                    />
+                    <div className='dateFrom' 
+                        dangerouslySetInnerHTML={{__html: item.dateFrom || ''}} 
+                    />
+                </div>
+            </label>
         </li>
 
         return (

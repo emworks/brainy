@@ -1,6 +1,7 @@
 const PORT = process.env.PORT || 3000;
 
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
@@ -11,10 +12,13 @@ if (process.env.NODE_ENV === 'production') {
     );
 }
 
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/client/public'));
+
+app.set('views', path.join(__dirname, 'client/public/views'));
+app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/client/index.html');
+    res.render('index');
 });
 
 // require('./api/search')(app);
