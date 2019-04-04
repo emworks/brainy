@@ -19,8 +19,9 @@
 17. Add names recognition.
 18. Move quick search to suggestions.
 19. Fix bot pagination.
-20. Https.
+20. <s>Https</s>.
 21. <s>Separate web and bot search logs.</s>
+22. Export (web).
 
 ## Sources
 - <s>https://www.coursera.org</s>
