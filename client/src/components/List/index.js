@@ -121,6 +121,7 @@ class List extends React.Component {
                     </div>
                 </div>
                 <input name='q' type='hidden' value={q} />
+                <input name='client' type='hidden' value={this.getClient()} />
                 <ul>
                     {list}
                 </ul>
@@ -171,7 +172,7 @@ class List extends React.Component {
         this.fetch.timeout = setTimeout(() => {
             if (query) {
                 this.setState({ isLoading: true });
-                fetch(`${this.props.url}?q=${query}&client=${isMobile() ? 'mobile' : 'web'}`)
+                fetch(`${this.props.url}?q=${query}&client=${this.getClient()}`)
                     .then(data => data.json())
                     .then(({ data }) => this.setState({ 
                         data, 
@@ -183,6 +184,8 @@ class List extends React.Component {
             }
         }, timeout);
     }
+
+    getClient = () => isMobile() ? 'mobile' : 'desktop';
 
     getSelectedUrls = () => this.state.data.reduce((memo, { _id, title, url }) => {
         if (this.state.selected.has(_id)) {

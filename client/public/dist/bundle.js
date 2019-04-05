@@ -24741,6 +24741,7 @@ var List = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement('input', { name: 'q', type: 'hidden', value: q }),
+                _react2.default.createElement('input', { name: 'client', type: 'hidden', value: _this.getClient() }),
                 _react2.default.createElement(
                     'ul',
                     null,
@@ -24797,7 +24798,7 @@ var List = function (_React$Component) {
             _this.fetch.timeout = setTimeout(function () {
                 if (query) {
                     _this.setState({ isLoading: true });
-                    fetch(_this.props.url + '?q=' + query + '&client=' + (isMobile() ? 'mobile' : 'web')).then(function (data) {
+                    fetch(_this.props.url + '?q=' + query + '&client=' + _this.getClient()).then(function (data) {
                         return data.json();
                     }).then(function (_ref) {
                         var data = _ref.data;
@@ -24812,6 +24813,10 @@ var List = function (_React$Component) {
                     });
                 }
             }, timeout);
+        };
+
+        _this.getClient = function () {
+            return isMobile() ? 'mobile' : 'desktop';
         };
 
         _this.getSelectedUrls = function () {
