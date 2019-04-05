@@ -184,12 +184,12 @@ class List extends React.Component {
         }, timeout);
     }
 
-    getSelectedUrls = () => this.state.data.reduce((memo, item) => {
-        if (this.state.selected.has(item._id)) {
-            memo.push(item.url);
+    getSelectedUrls = () => this.state.data.reduce((memo, { _id, title, url }) => {
+        if (this.state.selected.has(_id)) {
+            memo.push(`${title}\n${url}`);
         }
         return memo;
-    }, []).join('\n');
+    }, []).join('\n\n');
 }
 
 function isMobile() {
