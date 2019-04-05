@@ -43,7 +43,7 @@ class List extends React.Component {
                                 className='input' 
                                 placeholder={placeholder} 
                             />
-                            <button className='button button-search'>Найти</button>
+                            <button className='button button-search' />
                         </div>
                     </form>
                     <div className='contact-link'>
@@ -70,7 +70,7 @@ class List extends React.Component {
                                 placeholder={placeholder}
                                 defaultValue={q}
                             />
-                            <button className='button button-search'>Найти</button>
+                            <button className='button button-search' />
                         </div>
                     </form>
                 </div>
