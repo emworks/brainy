@@ -107,14 +107,19 @@
     }
 
     .contact-link {
-        color: #c6c6c6;
-        text-decoration: none;
         position: absolute;
         bottom: 20px;
-        font-size: 20px;
+        left: 0;
+        width: 100%;
 
-        &:active, &:hover {
-            color: #999;
+        a {
+            color: #c6c6c6;
+            text-decoration: none;
+            font-size: 20px;
+    
+            &:active, &:hover {
+                color: #999;
+            }
         }
     }
 }
@@ -253,7 +258,9 @@
         }
     
         .contact-link {
-            font-size: 16px;
+            a {
+                font-size: 16px;
+            }
         }
     }
 
