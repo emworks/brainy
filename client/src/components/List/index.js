@@ -45,6 +45,9 @@ class List extends React.Component {
                             />
                             <button className='button button-search'>Найти</button>
                         </div>
+                        <a className='contact-link' href='mailto:hello@mybrainy.ru' title='Brainy'>
+                            Brainy
+                        </a>
                     </form>
                 </div>
             )

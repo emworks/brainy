@@ -94,6 +94,7 @@
     display: table;
     width: 100%;
     text-align: center;
+    position: relative;
 
     form {
         display: table-cell;
@@ -102,6 +103,18 @@
         .wrapper {
             margin: 0 auto;
             max-width: 400px;
+        }
+    }
+
+    .contact-link {
+        color: #c6c6c6;
+        text-decoration: none;
+        position: absolute;
+        bottom: 20px;
+        font-size: 20px;
+
+        &:active, &:hover {
+            color: #999;
         }
     }
 }
@@ -232,6 +245,16 @@
     .tip {
         font-size: 12px;
         margin-bottom: 10px;
+    }
+
+    .search-landing {    
+        form .wrapper {
+            margin-top: -50px;
+        }
+    
+        .contact-link {
+            font-size: 16px;
+        }
     }
 
     .search-list {
