@@ -26128,7 +26128,7 @@ var List = function (_React$Component) {
                     { className: 'search-landing preload' + (isLoading ? ' unloaded' : '') },
                     _react2.default.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit },
+                        { onSubmit: this.handleSubmit, autocomplete: 'off' },
                         _react2.default.createElement(
                             'div',
                             { className: 'wrapper' },
@@ -26167,7 +26167,7 @@ var List = function (_React$Component) {
                     { className: 'input-wrapper fixed' },
                     _react2.default.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit },
+                        { onSubmit: this.handleSubmit, autocomplete: 'off' },
                         _react2.default.createElement(
                             'div',
                             { className: 'wrapper' },
