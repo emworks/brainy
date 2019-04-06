@@ -1,6 +1,8 @@
 $input-s-height: 36px;
 $input-s-border-radius: 20px;
-$input-l-height: 56px;
+$input-m-height: 46px;
+$input-m-border-radius: 25px;
+$input-l-height: 51px;
 $input-l-border-radius: 30px;
 
 .wrapper, .wrapper-wide {
@@ -372,6 +374,8 @@ $input-l-border-radius: 30px;
 @media (max-width: 480px) {
     .search-landing {
         .input {
+            height: $input-m-height;
+            border-radius: $input-m-border-radius;
             font-size: 15px;
             padding-right: 77px;
             padding-left: 17px;
@@ -379,6 +383,8 @@ $input-l-border-radius: 30px;
         }
 
         .button {
+            height: $input-m-height;
+            border-radius: 0 $input-m-border-radius $input-m-border-radius 0;
             right: 20px;
         }
     }
