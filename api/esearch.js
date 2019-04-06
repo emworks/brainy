@@ -1,24 +1,19 @@
 const db = require('../db/').elasticsearch;
 const logger = require('../lib/logger');
 
-async function _search(body) {
-    const data = await db.search({
-        index: 'edu',
-        body
-    });
-
-    return { data: data.hits.hits.map(({ 
-        _id, 
-        _source: { 
-            title, 
-            url, 
-            description, 
-            sourceId, 
-            dateFrom, 
-            rating,
-            lang
-        } = {}
-    }) => ({
+const _normalize = ({ 
+    _id, 
+    _source: { 
+        title, 
+        url, 
+        description, 
+        sourceId, 
+        dateFrom, 
+        rating,
+        lang
+    } = {}
+}) => {
+    return ({
         _id, 
         title, 
         url, 
@@ -27,7 +22,18 @@ async function _search(body) {
         dateFrom, 
         rating,
         lang
-    })) };
+    })
+};
+
+async function _search(body) {
+    const data = await db.search({
+        index: 'edu',
+        body
+    });
+
+    return { 
+        data: data.hits.hits.map(_normalize)
+    };
 }
 
 async function _searchByQuery(q = '', size = 10000) {
@@ -53,27 +59,9 @@ async function _searchByQuery(q = '', size = 10000) {
         }
     });
 
-    return { data: data.hits.hits.map(({ 
-        _id, 
-        _source: { 
-            title, 
-            url, 
-            description, 
-            sourceId, 
-            dateFrom, 
-            rating,
-            lang
-        } = {}
-    }) => ({
-        _id, 
-        title, 
-        url, 
-        description, 
-        sourceId, 
-        dateFrom, 
-        rating,
-        lang
-    })) };
+    return { 
+        data: data.hits.hits.map(_normalize)
+    };
 }
 
 module.exports = app => {

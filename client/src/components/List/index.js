@@ -36,7 +36,7 @@ class List extends React.Component {
         if (!q) {
             return (
                 <div className={'search-landing preload' + (isLoading ? ' unloaded' : '')}>
-                    <form onSubmit={this.handleSubmit} autocomplete='off'>
+                    <form onSubmit={this.handleSubmit} autoComplete='off'>
                         <div className='wrapper'>
                             <input 
                                 name='query'
@@ -62,7 +62,7 @@ class List extends React.Component {
         return (
             <div className='search-list'>
                 <div className='input-wrapper fixed'>
-                    <form onSubmit={this.handleSubmit} autocomplete='off'>
+                    <form onSubmit={this.handleSubmit} autoComplete='off'>
                         <div className='wrapper'>
                             <input 
                                 name='query'
