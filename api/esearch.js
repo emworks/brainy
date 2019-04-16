@@ -53,8 +53,8 @@ async function _searchByQuery(q = '', size = 10000) {
             },
             size,
             sort: [
-                { lang: { order: 'desc' }},
                 { _score: { order: 'desc' }},
+                { lang: { order: 'desc' }},
             ]
         }
     });
