@@ -66,11 +66,11 @@ async function _searchByQuery(q = '', size = 10000) {
 
 module.exports = app => {
     app.get('/api/esearch', async function (req, res) {
-        const { q, client } = req.query;
+        const { q, client, size } = req.query;
 
         logger.add(q, 'query', client);
 
-        const data = await _searchByQuery(q);
+        const data = await _searchByQuery(q, size);
         res.send(Object.assign({ q }, data));
     });
 

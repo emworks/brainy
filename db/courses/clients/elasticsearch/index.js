@@ -1,12 +1,36 @@
 const client = require('../../../').elasticsearch;
 const data = require('require-all')(__dirname + '/../../data');
 
+const fs = require('fs');
+const path = require('path');
+const synonyms = fs.readFileSync(path.resolve(__dirname, './dictionaries/synonyms.txt'), 'utf8').split('\r\n');
+
 migrate(Object.keys(data).reduce((memo, key) => memo.concat(data[key]), []), 'edu');
 
 function migrate(data = [], indexName) {
     const indexNameTmp = indexName + Date.now();
 
-    client.indices.create({ index: indexNameTmp })
+    client.indices.create({
+        index: indexNameTmp,
+        body: {
+            settings: {
+                analysis: {
+                    filter: {
+                        synonym_filter: {
+                            type: 'synonym',
+                            synonyms
+                        }
+                    },
+                    analyzer: {
+                        filter_synonyms: {
+                            tokenizer: 'standard',
+                            filter: [ 'synonym_filter' ]
+                        }
+                    }
+                }
+            }
+        }
+    })
         .then(resp => {
             console.log(`successfully created index '${indexName}'`, resp);
 
@@ -17,15 +41,15 @@ function migrate(data = [], indexName) {
                     properties: {
                         title: {
                             type: 'text',
-                            analyzer: 'english'
+                            analyzer: 'filter_synonyms'
                         },
                         url: {
                             type: 'text',
-                            analyzer: 'english'
+                            analyzer: 'filter_synonyms'
                         },
                         description: {
                             type: 'text',
-                            analyzer: 'english'
+                            analyzer: 'filter_synonyms'
                         },
                         sourceId: { type: 'text' }
                     }

@@ -7,6 +7,7 @@ class List extends React.Component {
     constructor(props) {
         super(props);
         this.listRef = React.createRef();
+        this.size = 100;
     }
 
     state = {
@@ -56,7 +57,7 @@ class List extends React.Component {
         }
 
         const counter = data.length ? (<div className='tip'>
-            Найдено: {data.length}
+            Найдено{data.length === this.size ? ` более ${this.size}` : `: ${data.length}`}
         </div>) : null;
 
         return (
@@ -172,7 +173,7 @@ class List extends React.Component {
         this.fetch.timeout = setTimeout(() => {
             if (query) {
                 this.setState({ isLoading: true });
-                fetch(`${this.props.url}?q=${query}&client=${this.getClient()}`)
+                fetch(`${this.props.url}?q=${query}&client=${this.getClient()}&size=${this.size}`)
                     .then(data => data.json())
                     .then(({ data }) => this.setState({ 
                         data, 

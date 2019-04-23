@@ -26052,7 +26052,7 @@ var List = function (_React$Component) {
             _this.fetch.timeout = setTimeout(function () {
                 if (query) {
                     _this.setState({ isLoading: true });
-                    fetch(_this.props.url + '?q=' + query + '&client=' + _this.getClient()).then(function (data) {
+                    fetch(_this.props.url + '?q=' + query + '&client=' + _this.getClient() + '&size=' + _this.size).then(function (data) {
                         return data.json();
                     }).then(function (_ref) {
                         var data = _ref.data;
@@ -26087,6 +26087,7 @@ var List = function (_React$Component) {
         };
 
         _this.listRef = _react2.default.createRef();
+        _this.size = 100;
         return _this;
     }
 
@@ -26128,7 +26129,7 @@ var List = function (_React$Component) {
                     { className: 'search-landing preload' + (isLoading ? ' unloaded' : '') },
                     _react2.default.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit, autocomplete: 'off' },
+                        { onSubmit: this.handleSubmit, autoComplete: 'off' },
                         _react2.default.createElement(
                             'div',
                             { className: 'wrapper' },
@@ -26155,8 +26156,8 @@ var List = function (_React$Component) {
             var counter = data.length ? _react2.default.createElement(
                 'div',
                 { className: 'tip' },
-                '\u041D\u0430\u0439\u0434\u0435\u043D\u043E: ',
-                data.length
+                '\u041D\u0430\u0439\u0434\u0435\u043D\u043E',
+                data.length === this.size ? ' \u0431\u043E\u043B\u0435\u0435 ' + this.size : ': ' + data.length
             ) : null;
 
             return _react2.default.createElement(
@@ -26167,7 +26168,7 @@ var List = function (_React$Component) {
                     { className: 'input-wrapper fixed' },
                     _react2.default.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit, autocomplete: 'off' },
+                        { onSubmit: this.handleSubmit, autoComplete: 'off' },
                         _react2.default.createElement(
                             'div',
                             { className: 'wrapper' },
