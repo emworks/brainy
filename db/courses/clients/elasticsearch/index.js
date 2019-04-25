@@ -24,7 +24,7 @@ function migrate(data = [], indexName) {
                     analyzer: {
                         filter_synonyms: {
                             tokenizer: 'standard',
-                            filter: [ 'synonym_filter' ]
+                            filter: [ 'lowercase', 'synonym_filter' ]
                         }
                     }
                 }
