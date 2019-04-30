@@ -99,7 +99,9 @@ class List extends React.Component {
                 ? 'Ничего не найдено' : null;
         }
 
-        const list = data.map(template(this.handleSelect.bind(this), this.state.selected));
+        const list = data
+            .sort((lhs, rhs) => rhs.rating - lhs.rating)
+            .map(template(this.handleSelect.bind(this), this.state.selected));
 
         const exportBtn = selected.size > 1 ? <button className='button' type='submit'>
             Сравнить
