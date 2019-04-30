@@ -1,3 +1,8 @@
 node js, nodejs => node.js
 js => javascript
 frontend => front-end
+backend => back-end
+ts => typescript
+cpp, cxx => c++
+cs => c#
+cv => computer vision
