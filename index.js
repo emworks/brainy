@@ -24,7 +24,9 @@ app.get('/', function (req, res) {
 // require('./api/search')(app);
 const esearch = require('./api/esearch')(app);
 
-require('./lib/bot/telegram')({ esearch });
+if (process.env.NODE_ENV === 'production') {
+    require('./lib/bot/telegram')({ esearch });
+}
 
 require('./routes')({ app, esearch });
 
