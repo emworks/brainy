@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
+    "build": "npm ci && cd client && npm ci && npm run build",
     "start": "node .",
     "crawl": "node ./lib/crawler/index.test.js",
     "reindex": "node ./db/courses/clients/elasticsearch"
