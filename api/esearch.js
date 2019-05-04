@@ -54,6 +54,7 @@ async function _searchByQuery(q = '', size = 10000) {
             size,
             sort: [
                 { _score: { order: 'desc' }},
+                { rating: { order: 'desc' }},
                 { lang: { order: 'desc' }},
             ]
         }
