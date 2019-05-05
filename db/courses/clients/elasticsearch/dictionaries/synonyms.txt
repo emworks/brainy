@@ -15,4 +15,4 @@ react, react js, reactjs => react.js
 vue, vue js, vuejs => vue.js
 api => application programming interface
 sql => structured query language
-геймдизайн, гейм-дизайн, игрофикация, game design => разработка игр
+геймдизайн, гейм-дизайн, игрофикация, game design, gamedesign => разработка игр
