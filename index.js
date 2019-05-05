@@ -30,7 +30,4 @@ if (process.env.NODE_ENV === 'production') {
 
 require('./routes')({ app, esearch });
 
-const server = app.listen(PORT, '0.0.0.0', () => {
-    const { address, port } = server.address();
-    console.log(`Server is listening on port ${port}`);
-});
+const server = app.listen(PORT, '0.0.0.0', () => console.log(`Server is listening on port ${server.address().port}`));
