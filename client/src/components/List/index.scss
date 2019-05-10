@@ -5,6 +5,9 @@ $input-m-border-radius: 25px;
 $input-l-height: 51px;
 $input-l-border-radius: 30px;
 
+$color-green: #4eb276;
+$coolor-orange: #d9ba77;
+
 .wrapper, .wrapper-wide {
     padding: 20px;
 }
@@ -56,7 +59,7 @@ $input-l-border-radius: 30px;
 .button {
     height: $input-s-height;
     border: 0;
-    background-color: #4eb276;
+    background-color: $color-green;
     outline: 0;
     width: auto;
     cursor: pointer;
@@ -211,7 +214,7 @@ $input-l-border-radius: 30px;
                     display: none;
 
                     &:checked ~ .list-item:before {
-                        background-color: #4eb276;
+                        background-color: $color-green;
                     }
                 }
 
