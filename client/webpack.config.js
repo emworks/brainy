@@ -1,7 +1,10 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-    // devtool: 'source-map',
+    mode: 'production',
+    devtool: 'source-map',
     resolve: {
         alias: {
             src: path.resolve(__dirname, 'src/')
@@ -26,5 +29,17 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
-    }
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true
+            })
+        ]
+    },
+    plugins: [
+        new CompressionPlugin()
+    ]
 }
