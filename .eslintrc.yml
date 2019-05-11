@@ -1,0 +1,17 @@
+extends:
+  - "airbnb"
+  - "prettier"
+plugins:
+  - "prettier"
+  - "react"
+env:
+  node: true
+  browser: true
+  es6: true
+rules:
+  max-len: ["error", {
+    "code": 120,
+    "ignoreComments": true,
+    "ignoreUrls": true
+  }]
+  arrow-parens: ["error", "always"]
