@@ -39,4 +39,4 @@ oop, object-oriented programming, ооп => объектно-ориентиро�
 functional programming => функциональное программирование
 ruby on rails => ruby
 питон => python
-uml => unified modelling language
+uml => unified modeling language
