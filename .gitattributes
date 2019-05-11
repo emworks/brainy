@@ -1,0 +1,34 @@
+
+* text=auto
+
+# Git
+.gitattributes  text
+.gitignore      text
+.gitconfig      text
+.gitmodules     text
+
+*.js    text
+*.jsx   text
+*.html  text diff=html
+*.css   text diff=css
+
+# Windows Scripts
+*.bat text eol=crlf
+*.vbs text eol=crlf
+
+# Unix Script
+*.sh  text eol=lf
+
+*.lock      text
+*.json      text
+*.yml       text
+*.yaml      text
+*.txt       text
+*.md        text
+*.markdown  text
+README      text
+LICENSE     text
+AUTHORS     text
+NEWS        text
+COPYRIGHT   text
+INSTALL     text
