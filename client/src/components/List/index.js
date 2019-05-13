@@ -43,6 +43,7 @@ class List extends React.Component {
                                 name='query'
                                 className='input' 
                                 placeholder={placeholder} 
+                                autoFocus={true}
                             />
                             <button className='button button-search' />
                         </div>
