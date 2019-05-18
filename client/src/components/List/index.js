@@ -32,13 +32,14 @@ class List extends React.Component {
     render() {
         const { q, data, isLoading, selected } = this.state;
 
-        const placeholder = 'Чему бы вы хотели научиться?';
+        const placeholder = 'Что вы хотите изучить?';
 
         if (!q) {
             return (
                 <div className={'search-landing preload' + (isLoading ? ' unloaded' : '')}>
                     <form onSubmit={this.handleSubmit} autoComplete='off'>
                         <div className='wrapper'>
+                            <a className='logo' href='/' />
                             <input 
                                 name='query'
                                 className='input' 
@@ -50,7 +51,7 @@ class List extends React.Component {
                     </form>
                     <div className='contact-link'>
                         <a href='mailto:hello@mybrainy.ru' title='Brainy'>
-                            Brainy
+                            brainy
                         </a>
                     </div>
                 </div>
