@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "lint": "eslint -c .eslintrc.yml --ignore-path .gitignore '**/*.{js,jsx}'",
     "build": "yarn && cd client && yarn && yarn build",
     "start": "node .",
     "crawl": "node ./lib/crawler/index.test.js",
@@ -30,5 +31,17 @@
     "require-all": "^3.0.0",
     "sitemapper": "^2.2.0",
     "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.13.0",
+    "prettier": "^1.17.0",
+    "prettierrc": "^0.0.0-5"
   }
 }
